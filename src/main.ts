@@ -83,7 +83,10 @@ async function installDanger(option: Option) {
                 failOnStdErr: option.failOnStdErrWhenBundler,
             });
         } else {
-            await exec.exec(`bundle install --path=${option.installPath} --jobs 4 --retry 3`, undefined, {
+            await exec.exec(`bundle config set path ${option.installPath}`, undefined, {
+                failOnStdErr: option.failOnStdErrWhenBundler,
+            });
+            await exec.exec(`bundle install --jobs 4 --retry 3`, undefined, {
                 failOnStdErr: option.failOnStdErrWhenBundler,
             });
         }
